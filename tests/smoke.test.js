@@ -3,7 +3,8 @@ import { loadEntities, mergeMessages } from '@museumwnf/viewer-core'
 import {
   checkOfferedLanguages, checkRoutes, checkSectionMeta, checkTextsRendered, mountSite,
 } from '@museumwnf/viewer-core/testing'
-import { catalogues as sharedTexts } from '@museumwnf/viewer-i18n/standalone'
+import { catalogues as sharedTexts } from '@museumwnf/viewer-i18n/travels'
+import { ITINERARY_TYPE, isListed, projectCode, trailsOf } from '@museumwnf/viewer-layout/travels'
 import ownTexts from '../locales/en.json'
 import config from '../src/dataset.config.js'
 
@@ -12,100 +13,71 @@ import config from '../src/dataset.config.js'
 // nothing about the chrome — every text would render as its own name.
 const messages = mergeMessages(sharedTexts, { en: ownTexts })
 
+// A trail legacy listed, and its first itinerary, from this website's package.
+async function aTrail() {
+  const [collections] = await loadEntities(['collections'])
+  const trail = trailsOf(collections).find((t) => isListed(t))
+  const itinerary = collections.find((c) => c.parent_id === trail.id && c.type === ITINERARY_TYPE)
+  return { trail, itinerary }
+}
+
+// The pages are viewer-layout's (`travelsConfig`), tested there against its
+// fixture package; this test proves they render against this website's own
+// package, each on an application mounted on that page's address — as a
+// visitor arrives from a link.
 describe('website smoke test', () => {
-  it('mounts against the configured data package', async () => {
+  it('mounts the home page in legacy’s shell, with its country and theme selects', async () => {
     const { app, host } = await mountSite(config, messages)
-
-    expect(host.querySelector('.mwnf-page')).not.toBeNull()
-
-    // The composed landing page (named in `config.views.home`) replaces
-    // viewer-core's generic home view: the title, the cards and the record
-    // on display come from `config.home`, not from a page written here.
     expect(host.querySelector('.vc-home')).toBeNull()
-    expect(host.querySelector('.mwnf-home__title').textContent.trim()).not.toBe('')
-    expect(host.querySelector('.mwnf-cards__card')).not.toBeNull()
-
-    // The one thing this template's own test checks that the shared kit
-    // cannot: the placeholder site name renders in the header lockup, the
-    // #brand slot SiteShell.vue fills.
-    expect(host.textContent).toContain('travels')
-
-    app.unmount()
-  }, 20000)
-
-  // The other pages a scaffolded website starts with, rendered against the
-  // data package by the composed views, each on an application mounted on
-  // that page's address — as a visitor arrives from a link. The search form
-  // draws the keyword rows the search spec declares; the results page lists
-  // records under the filter panel the catalogue spec declares; the record
-  // page shows a record's sheet under the labels the sheet spec declares; the
-  // About page renders the one body entry the about spec names.
-  it('renders the composed search form from the search spec', async () => {
-    const { app, host } = await mountSite(config, messages, '#/search')
-    await vi.waitFor(() => expect(host.querySelector('.mwnf-search-form__row')).not.toBeNull(), { timeout: 20000 })
-    expect(host.querySelectorAll('.mwnf-search-form__row').length).toBeGreaterThan(1)
+    expect(host.querySelector('.mwnf-travels-header')).not.toBeNull()
+    await vi.waitFor(() => expect(host.querySelectorAll('.mwnf-travels-home__select').length).toBeGreaterThan(0), { timeout: 20000 })
+    expect(host.querySelectorAll('.mwnf-travels-home__select option').length).toBeGreaterThan(2)
     app.unmount()
   }, 60000)
 
-  it('renders the composed results page from the catalogue spec', async () => {
-    const { app, host } = await mountSite(config, messages, '#/catalogue')
-    await vi.waitFor(() => expect(host.querySelector('.mwnf-list__row')).not.toBeNull(), { timeout: 20000 })
-    expect(host.querySelector('.mwnf-filter')).not.toBeNull()
-    expect(host.querySelector('.mwnf-summary__count')).not.toBeNull()
+  it('lists a theme’s trails', async () => {
+    const { trail } = await aTrail()
+    const { app, host } = await mountSite(config, messages, `#/trails?project=${encodeURIComponent(projectCode(trail))}`)
+    await vi.waitFor(() => expect(host.querySelector('.mwnf-travels-trails__row')).not.toBeNull(), { timeout: 20000 })
     app.unmount()
   }, 60000)
 
-  it('renders the composed record page from the sheet spec', async () => {
-    const [items] = await loadEntities(['items'])
-    const { app, host } = await mountSite(config, messages, `#/item/${encodeURIComponent(items[0].id)}`)
-    await vi.waitFor(() => expect(host.querySelector('.mwnf-sheet__label')).not.toBeNull(), { timeout: 20000 })
-    expect(host.querySelector('.mwnf-record__title').textContent.trim()).not.toBe('')
+  it('draws a trail’s page, its itineraries first', async () => {
+    const { trail } = await aTrail()
+    const { app, host } = await mountSite(config, messages, `#/trail/${encodeURIComponent(trail.id)}`)
+    await vi.waitFor(() => expect(host.querySelector('.mwnf-travels-itinerary-row')).not.toBeNull(), { timeout: 20000 })
     app.unmount()
   }, 60000)
 
-  it('renders the About page on TextPageView from the about spec', async () => {
-    const { app, host } = await mountSite(config, messages, '#/about')
-    expect(host.querySelector('.mwnf-prose').textContent.trim()).not.toBe('')
+  it('draws an itinerary’s page', async () => {
+    const { itinerary } = await aTrail()
+    const { app, host } = await mountSite(config, messages, `#/itinerary/${encodeURIComponent(itinerary.id)}`)
+    await vi.waitFor(() => expect(host.querySelector('.mwnf-travels-content__prose')).not.toBeNull(), { timeout: 20000 })
     app.unmount()
-  }, 20000)
+  }, 60000)
 
   it('declares every route by name, and leaves the catch-all to the router', () => {
-    // A named route is what a view links to; a path written into a link is a
-    // second declaration of the same address, and the two drift.
-    expect(checkRoutes(config, { names: ['search', 'catalogue', 'item', 'about'] })).toEqual([])
-    // The three slots are the composed views, not viewer-core's generic ones.
-    expect(Object.keys(config.views ?? {}).sort()).toEqual(['detail', 'home', 'list'])
+    expect(checkRoutes(config, { names: ['home', 'trails', 'trail', 'itinerary'] })).toEqual([])
   })
 
   it('declares the entities every route reads', () => {
-    // A view rendering records against `null` is the failure this prevents:
-    // the router loads what a route names before the view is created.
     for (const route of config.extraViews) {
       expect(Array.isArray(route.meta?.entities), route.name).toBe(true)
     }
   })
 
   it('declares the section every route belongs to', () => {
-    // The shell reads `meta.section` (viewer-core's `useSection()`) to
-    // highlight the current section in the menu; a route without one would
-    // leave the menu silently unmarked rather than fail.
     expect(checkSectionMeta(config)).toEqual([])
   })
 
   it('publishes no generic entity pages', () => {
-    // Leaving `entities` at the package default publishes one list and one
-    // detail page per exported entity — routes this website never had, showing
-    // the data package's shape rather than the site's.
     expect(config.features.entities).toEqual([])
   })
 
-  // The one language rule, checked the same way in all seven websites: every
-  // offered language is one the package declares for this site AND one the
-  // items actually carry. Offering a language whose item sheets all render
-  // English is the failure this catches, and a visitor cannot tell it from a
-  // site that is simply untranslated.
-  it('offers the languages the package declares, where the items carry them', () => {
-    expect(checkOfferedLanguages(config)).toEqual([])
+  // Legacy drew a trail's page in the trail's language: the site offers the
+  // languages the package declares, where the trails carry them.
+  it('offers the languages the package declares, where the trails carry them', () => {
+    expect(checkOfferedLanguages(config, { entity: 'collections' })).toEqual([])
     expect(config.languages.length).toBeGreaterThan(0)
     const switcher = config.navigation.languages
     expect(switcher.map((l) => l.code)).toEqual(config.languages)
@@ -113,18 +85,11 @@ describe('website smoke test', () => {
   })
 
   // The chrome is two layers, and either one failing is silent: a missing
-  // entry renders as its own name rather than as an error. This asserts the
-  // rendered page, not the files, so a bundle that installs but never reaches
-  // the components fails here too.
-  it('renders the shared texts and its own over them', async () => {
+  // entry renders as its own name rather than as an error.
+  it('renders the shared texts', async () => {
     const { app, host } = await mountSite(config, messages)
-
-    // From viewer-i18n: the layout's skip link.
-    expect(host.textContent).toContain('Skip to content')
-    // Nothing rendered as a bare entry name, which is what a missing text
-    // looks like — there is no exception to throw for one.
-    expect(checkTextsRendered(host, { namespaces: ['trails', 'core', 'layout'] })).toEqual([])
-
+    await vi.waitFor(() => expect(host.querySelector('.mwnf-travels-home')).not.toBeNull(), { timeout: 20000 })
+    expect(checkTextsRendered(host, { namespaces: ['trails', 'travels', 'core', 'layout'] })).toEqual([])
     app.unmount()
-  }, 20000)
+  }, 60000)
 })

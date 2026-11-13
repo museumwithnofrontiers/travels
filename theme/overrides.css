@@ -1,1 +1,6 @@
 /* Escape hatch for styling beyond tokens.css — keep it empty until a need cannot be expressed with a token. */
+
+/* Legacy travels.museumwnf.org's page colour around its boxed pages (style/style.css). */
+body {
+  background: #bea684;
+}
