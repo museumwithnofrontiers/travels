@@ -16,12 +16,13 @@ viewer-layout's shared stylesheet, and nothing else of the platform.
 | --- | --- |
 | `src/dataset.config.js` | the site's address |
 | `src/routes.js` | its routes and whole declaration (`travelsConfig`) |
-| `src/SiteShell.vue` | legacy's frame: header, menu, footer |
+| `src/SiteShell.vue` | legacy's frame: the header, its menu, the rounded panel, and this site's footer under it |
 | `src/views/` | the pages: home, a country's or theme's trails, a trail, an itinerary |
-| `src/components/` | the breadcrumbs and a trail's heading band |
+| `src/components/` | the page in the panel and its cream left column (`TravelsPage`), See Also, the breadcrumbs, a trail's band with its book |
 | `src/composables/travels.js` | the records the pages read |
 | `src/rules.js` | legacy's rules: which trails show, galleries, neighbours |
-| `src/styles/travels.css` | the pages' styles; `theme/` holds the site's colours and assets |
+| `src/styles/travels.css` | the pages' styles, in legacy's default colours and in the yellow of its Islamic Art trails |
+| `theme/assets/legacy/` | legacy's frame pictures, byte for byte, with their sources and hashes (`SOURCES.json`, checked by `tests/assets.test.js`) |
 | `tests/smoke.test.js` | the site against its published package |
 | `tests/pages/` | the pages against a small fixture package (`vitest.pages.config.js`) |
 

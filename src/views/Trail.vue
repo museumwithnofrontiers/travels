@@ -10,10 +10,11 @@
 // legacy, and is not drawn.
 import { computed } from 'vue'
 import { renderBlock, useI18n } from '@museumwnf/viewer-core'
-import Crumbs from '../components/TravelsCrumbs.vue'
 import { useTravels } from '../composables/travels.js'
-import { itineraryNumber, itineraryPicture, lines, TRAIL_TABS } from '../rules.js'
+import { itineraryNumber, itineraryPicture, lines, themeOf, TRAIL_TABS } from '../rules.js'
+import SeeAlso from '../components/SeeAlso.vue'
 import TrailHeader from '../components/TrailHeader.vue'
+import TravelsPage from '../components/TravelsPage.vue'
 
 const props = defineProps({
   id: { type: String, required: true },
@@ -24,6 +25,7 @@ const data = useTravels()
 
 const trail = computed(() => data.collectionById.value.get(props.id) ?? null)
 const text = computed(() => data.text(trail.value))
+const theme = computed(() => (trail.value ? themeOf(trail.value) : ''))
 const current = computed(() => (TRAIL_TABS.includes(props.tab) ? props.tab : 'its'))
 
 const tabs = computed(() => [
@@ -54,12 +56,13 @@ function back() {
 </script>
 
 <template>
+  <TravelsPage>
+    <template v-if="trail" #aside><SeeAlso :tabs="tabs" :theme="theme" /></template>
   <div class="mwnf-travels-trail">
     <p v-if="!trail" class="mwnf-travels__empty">{{ t('core.detail.notFound') }}</p>
     <template v-else>
-      <div class="mwnf-travels-banner">
-        <Crumbs :crumbs="crumbs" />
-        <TrailHeader :trail="trail" :text="text" :tabs="tabs" />
+      <div class="mwnf-travels-banner mwnf-travels-banner--trails">
+        <TrailHeader :trail="trail" :text="text" :heading="data.countryName(trail.country_id)" :crumbs="crumbs" />
       </div>
       <div class="mwnf-travels-content">
         <div class="mwnf-travels-content__head">
@@ -87,7 +90,7 @@ function back() {
               <img v-if="itinerary.picture" :src="itinerary.picture" :alt="itinerary.title" :title="t('travels.picture.enlarge')" loading="lazy">
             </div>
             <div class="mwnf-travels-itinerary-row__text">
-              <b>{{ t('travels.itinerary.label') }}&nbsp;{{ itinerary.number }} :</b>
+              <b>{{ t('travels.itinerary.label') }}&nbsp;{{ itinerary.number }} :</b>{{ ' ' }}
               <strong><RouterLink :to="{ name: 'itinerary', params: { id: itinerary.id }, query: { tab: 'des' } }">{{ itinerary.title }}&nbsp;&gt;&gt;</RouterLink></strong>
               <br>
               <template v-if="itinerary.locations.length">
@@ -101,4 +104,5 @@ function back() {
       </div>
     </template>
   </div>
+  </TravelsPage>
 </template>

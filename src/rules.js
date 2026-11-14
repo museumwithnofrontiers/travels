@@ -19,6 +19,19 @@ export const LOCATION_TYPE = 'location'
 export const HIDDEN_PROJECTS = Object.freeze(['GPA'])
 
 /**
+ * The colours legacy drew a project's pages in (header.include.php's
+ * `$themeSection`, its style_inner_en_<colour>.css): Islamic Art's trails in
+ * yellow. A project not named here keeps legacy's default colours.
+ */
+export const PROJECT_THEMES = Object.freeze({ IAM: 'yellow' })
+
+/** The colour of a trail's project, or of a project code; '' for the default. */
+export function themeOf(trailOrCode) {
+  const code = typeof trailOrCode === 'string' ? trailOrCode : projectCode(trailOrCode)
+  return PROJECT_THEMES[code] ?? ''
+}
+
+/**
  * The countries legacy's menu left out. Its Exhibition Trails menu was written
  * by hand (header.include.php) and names no Algeria, though its home's country
  * select, read from the data, offers it and its project page lists the trail.

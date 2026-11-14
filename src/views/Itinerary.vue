@@ -10,10 +10,11 @@
 // food and contacts) belong to the tours, which are not rebuilt.
 import { computed, ref, watch } from 'vue'
 import { renderBlock, useI18n } from '@museumwnf/viewer-core'
-import Crumbs from '../components/TravelsCrumbs.vue'
 import { useTravels } from '../composables/travels.js'
-import { galleryOf, ITINERARY_TABS, itineraryNumber, neighbours } from '../rules.js'
+import { galleryOf, ITINERARY_TABS, itineraryNumber, neighbours, themeOf } from '../rules.js'
+import SeeAlso from '../components/SeeAlso.vue'
 import TrailHeader from '../components/TrailHeader.vue'
+import TravelsPage from '../components/TravelsPage.vue'
 
 const props = defineProps({
   id: { type: String, required: true },
@@ -26,6 +27,7 @@ const itinerary = computed(() => data.collectionById.value.get(props.id) ?? null
 const trail = computed(() => (itinerary.value ? data.collectionById.value.get(itinerary.value.parent_id) ?? null : null))
 const trailText = computed(() => data.text(trail.value))
 const own = computed(() => data.text(itinerary.value))
+const theme = computed(() => (trail.value ? themeOf(trail.value) : ''))
 const current = computed(() => (ITINERARY_TABS.includes(props.tab) ? props.tab : 'des'))
 const heading = computed(() => ({ number: itineraryNumber(itinerary.value), title: own.value.title ?? '' }))
 
@@ -55,12 +57,13 @@ const html = (value) => (value ? renderBlock(String(value), { breaks: true }) : 
 </script>
 
 <template>
+  <TravelsPage>
+    <template v-if="itinerary && trail" #aside><SeeAlso :tabs="tabs" :theme="theme" /></template>
   <div class="mwnf-travels-itinerary">
     <p v-if="!itinerary || !trail" class="mwnf-travels__empty">{{ t('core.detail.notFound') }}</p>
     <template v-else>
-      <div class="mwnf-travels-banner">
-        <Crumbs :crumbs="crumbs" />
-        <TrailHeader :trail="trail" :text="trailText" :itinerary="heading" :tabs="tabs" />
+      <div class="mwnf-travels-banner mwnf-travels-banner--trails">
+        <TrailHeader :trail="trail" :text="trailText" :heading="data.countryName(trail.country_id)" :crumbs="crumbs" :itinerary="heading" :theme="theme" />
       </div>
       <div class="mwnf-travels-content">
         <div class="mwnf-travels-content__neighbours">
@@ -101,4 +104,5 @@ const html = (value) => (value ? renderBlock(String(value), { breaks: true }) : 
       </div>
     </template>
   </div>
+  </TravelsPage>
 </template>

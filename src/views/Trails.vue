@@ -10,8 +10,9 @@ import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useI18n, useSiteConfig } from '@museumwnf/viewer-core'
 import Crumbs from '../components/TravelsCrumbs.vue'
+import TravelsPage from '../components/TravelsPage.vue'
 import { useTravels } from '../composables/travels.js'
-import { locationsOfTrail, mainLocations, projectCode } from '../rules.js'
+import { locationsOfTrail, mainLocations, projectCode, themeOf } from '../rules.js'
 
 const { t } = useI18n()
 const route = useRoute()
@@ -27,6 +28,9 @@ const projectEntry = computed(() => data.projects.value.find((row) => row.code =
 const heading = computed(() => (country.value
   ? data.countryName(country.value)
   : projectEntry.value ? data.projectName(projectEntry.value.id) || projectEntry.value.code : ''))
+
+// A theme's list takes its project's colours and banner; a country's the trails' banner.
+const theme = computed(() => (country.value ? '' : themeOf(project.value)))
 
 const rows = computed(() => data.listed.value
   .filter((trail) => (country.value ? trail.country_id === country.value : projectCode(trail) === project.value))
@@ -50,10 +54,13 @@ const rows = computed(() => data.listed.value
 </script>
 
 <template>
+  <TravelsPage>
   <div class="mwnf-travels-trails">
-    <div class="mwnf-travels-banner">
-      <h1 class="mwnf-travels-banner__heading">{{ heading }}</h1>
-      <Crumbs :crumbs="[{ text: t('travels.nav.home'), to: { name: 'home' } }, { text: t('travels.nav.exhibitionTrails'), to: { name: 'home' } }, { text: heading }]" />
+    <div class="mwnf-travels-banner" :class="country ? 'mwnf-travels-banner--trails' : `mwnf-travels-banner--theme mwnf-travels-banner--${theme || 'default'}`">
+      <div class="mwnf-travels-banner__heading-block">
+        <h1 class="mwnf-travels-banner__heading">{{ heading }}</h1>
+        <Crumbs :crumbs="[{ text: t('travels.nav.home'), to: { name: 'home' } }, { text: t('travels.nav.exhibitionTrails'), to: { name: 'home' } }, { text: heading }]" />
+      </div>
       <div class="mwnf-travels-banner__about">
         <p class="mwnf-travels-banner__about-heading">{{ t('travels.home.about') }}</p>
         <p v-if="country">{{ t('travels.list.countryIntro') }} {{ heading }}.</p>
@@ -80,4 +87,5 @@ const rows = computed(() => data.listed.value
       </div>
     </div>
   </div>
+  </TravelsPage>
 </template>

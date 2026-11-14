@@ -1,19 +1,23 @@
 <script setup>
-// The band over a trail's and an itinerary's pages (`exDetailsmenuListing`,
-// `exDetails`, `seeAlsoCurver`): the trail's title, subtitle and region, on
-// an itinerary's page "ITINERARY <n>: <its title>"; the trail's book — its
-// cover, a link to the book's page on the Publications site in the page's
-// language — under "Relevant MWNF Travel Book"; then "See Also" and the
-// page's tabs. `tabs`: [{ key, label, tip, to, active }].
+// The band under the banner of a trail's and an itinerary's pages
+// (`headingForInsideEx`, `exDetailsmenuListing`, `exDetails`): the trail's
+// country and the breadcrumbs, the trail's title, subtitle and region, on
+// an itinerary's page "ITINERARY <n>: <its title>"; beside them the trail's
+// book under "Relevant MWNF Travel Book" — its cover, a link to the book's
+// page on the Publications site in the page's language. `theme` draws the
+// book's box in the project's colour, as legacy's itinerary page did.
 import { computed } from 'vue'
 import { useI18n } from '@museumwnf/viewer-core'
+import Crumbs from './TravelsCrumbs.vue'
 import { bookLink } from '../rules.js'
 
 const props = defineProps({
   trail: { type: Object, required: true },
   text: { type: Object, default: () => ({}) },
+  heading: { type: String, default: '' },
+  crumbs: { type: Array, default: () => [] },
   itinerary: { type: Object, default: null },
-  tabs: { type: Array, default: () => [] },
+  theme: { type: String, default: '' },
 })
 const { t, locale } = useI18n()
 
@@ -24,32 +28,23 @@ const cover = computed(() => props.trail.images?.[0]?.url ?? null)
 <template>
   <div class="mwnf-travels-detail-band">
     <div class="mwnf-travels-detail-band__texts">
-      <div v-if="text.title" class="mwnf-travels-detail-band__line"><strong>{{ text.title }}</strong></div>
-      <div v-if="text.extra?.subtitle" class="mwnf-travels-detail-band__line"><strong>{{ text.extra.subtitle }}</strong></div>
-      <div v-if="text.extra?.region_territory" class="mwnf-travels-detail-band__line"><b>{{ t('travels.trail.region') }}:</b>&nbsp;<strong>{{ text.extra.region_territory }}</strong></div>
-      <div v-if="itinerary" class="mwnf-travels-detail-band__line mwnf-travels-detail-band__itinerary">
-        {{ t('travels.itinerary.label').toUpperCase() }}&nbsp;{{ itinerary.number }}:&nbsp;{{ itinerary.title }}
+      <h1 class="mwnf-travels-detail-band__heading">{{ heading }}</h1>
+      <Crumbs :crumbs="crumbs" />
+      <div class="mwnf-travels-detail-band__lines">
+        <div v-if="text.title" class="mwnf-travels-detail-band__line"><strong>{{ text.title }}</strong></div>
+        <div v-if="text.extra?.subtitle" class="mwnf-travels-detail-band__line"><strong>{{ text.extra.subtitle }}</strong></div>
+        <div v-if="text.extra?.region_territory" class="mwnf-travels-detail-band__line"><b>{{ t('travels.trail.region') }}:</b>&nbsp;<strong>{{ text.extra.region_territory }}</strong></div>
+        <div v-if="itinerary" class="mwnf-travels-detail-band__line mwnf-travels-detail-band__itinerary">
+          {{ t('travels.itinerary.label').toUpperCase() }}&nbsp;{{ itinerary.number }}:&nbsp;{{ itinerary.title }}
+        </div>
       </div>
     </div>
-    <div class="mwnf-travels-detail-band__book">
+    <div class="mwnf-travels-detail-band__book" :class="theme && `mwnf-travels-detail-band__book--${theme}`">
       <template v-if="cover">
         <a v-if="href" :href="href" target="_blank" rel="noopener"><img :src="cover" alt=""></a>
         <img v-else :src="cover" alt="">
       </template>
       <span class="mwnf-travels-detail-band__book-label">{{ t('travels.trail.travelBook') }}</span>
-    </div>
-  </div>
-  <div class="mwnf-travels-see-also">
-    <div class="mwnf-travels-see-also__heading">{{ t('travels.trail.seeAlso') }}</div>
-    <div class="mwnf-travels-see-also__tabs">
-      <div
-        v-for="tab in tabs"
-        :key="tab.key"
-        class="mwnf-travels-see-also__tab"
-        :class="{ 'mwnf-travels-see-also__tab--active': tab.active }"
-      >
-        <RouterLink :to="tab.to" :title="tab.tip || undefined" :aria-current="tab.active ? 'page' : undefined">{{ tab.label }}</RouterLink>
-      </div>
     </div>
   </div>
 </template>
