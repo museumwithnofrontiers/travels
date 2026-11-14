@@ -2,11 +2,15 @@
 // Legacy's Exhibition Trails page (travel_et_home.php): "Exhibition Trails",
 // the breadcrumbs, "About" and its text, then a country select and a theme
 // select, each opening the trails of the choice (travel_et_trail.php?cid= /
-// ?tid=). The theme select leaves out the projects legacy hid (GPA).
+// ?tid=). The theme select leaves out the projects legacy hid (GPA). All of
+// it on legacy's landing picture (bannerLandingEX): the arcade, the gold box
+// holding the selects, and the Exhibition Trail logo.
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from '@museumwnf/viewer-core'
+import exhibitionFormat from '../../theme/assets/legacy/exhibition-format-en.jpg'
 import Crumbs from '../components/TravelsCrumbs.vue'
+import TravelsPage from '../components/TravelsPage.vue'
 import { useTravels } from '../composables/travels.js'
 
 const { t } = useI18n()
@@ -23,6 +27,7 @@ function open(key, value) {
 </script>
 
 <template>
+  <TravelsPage>
   <div class="mwnf-travels-home">
     <div class="mwnf-travels-home__banner">
       <h1 class="mwnf-travels-home__heading">{{ t('travels.nav.exhibitionTrails') }}</h1>
@@ -48,5 +53,7 @@ function open(key, value) {
         </select>
       </label>
     </div>
+    <img class="mwnf-travels-home__format" :src="exhibitionFormat" alt="">
   </div>
+  </TravelsPage>
 </template>

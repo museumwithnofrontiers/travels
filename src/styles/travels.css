@@ -1,94 +1,271 @@
-/* The Travels site (travels.museumwnf.org's style/style.css): its 990px
-   column on the dark red panel, the beige page around it, its Trebuchet
-   headings and its pale texts. */
+/* The Travels site in legacy travels.museumwnf.org's frame
+   (style/style_inner_en.css, and style_inner_en_yl.css for Islamic Art's
+   yellow): the 996px dark red frame on the beige page, its header, the
+   rounded panel with its cream left column, the banners, the landing picture,
+   See Also and the travel book box. Every picture is legacy's own
+   (theme/assets/legacy/, SOURCES.json). Below 1000px the frame gives way to
+   one column in the same colours. */
 
 .mwnf-travels {
   --mwnf-travels-page: #bea684;
-  --mwnf-travels-panel: #680003;
-  --mwnf-travels-text: #efdaad;
-  --mwnf-travels-heading: #f6e2b6;
+  --mwnf-travels-frame: #920408;
+  --mwnf-travels-header: #680003;
+  --mwnf-travels-column: #f0dbae;
+  --mwnf-travels-paper: #fff9e9;
+  --mwnf-travels-menu-text: #efdaad;
   --mwnf-travels-title: #deceaa;
-  --mwnf-travels-line: #8c3a2b;
-  display: flex;
-  flex-direction: column;
-  width: 990px;
+  --mwnf-travels-heading: #410102;
+  --mwnf-travels-label: #885437;
+  --mwnf-travels-strong: #690000;
+  --mwnf-travels-link: #900407;
+  --mwnf-travels-crumbs: #804040;
+  --mwnf-travels-rule: #e2dab8;
+  --mwnf-travels-box: #f0dbae;
+  --mwnf-travels-visit: #b40303;
+  --mwnf-travels-itinerary: #c77403;
+  --mwnf-travels-dots: #d9c7bb;
+  width: 996px;
   max-width: 100%;
-  min-height: 100vh;
   margin: 0 auto;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;
-  color: var(--mwnf-travels-text);
-  background-color: var(--mwnf-travels-panel);
+  line-height: normal;
+  color: #282828;
 }
 .mwnf-travels *,
 .mwnf-travels *::before,
 .mwnf-travels *::after { box-sizing: border-box; }
-.mwnf-travels a { color: var(--mwnf-travels-heading); }
+.mwnf-travels a { color: var(--mwnf-travels-strong); text-decoration: none; }
+.mwnf-travels a:hover { color: #bb0408; }
 .mwnf-travels p { margin: 0; padding: 0 0 7px; }
 .mwnf-travels h1,
 .mwnf-travels h2 { margin: 0; padding: 0 0 10px; font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif; font-weight: bold; }
-.mwnf-travels h1 { font-size: 20px; color: var(--mwnf-travels-title); }
-.mwnf-travels h2 { font-size: 15px; color: var(--mwnf-travels-heading); }
+.mwnf-travels h1 { font-size: 20px; color: var(--mwnf-travels-heading); }
+.mwnf-travels h2 { font-size: 16px; color: #770306; }
+.mwnf-travels b { font-size: 11px; color: var(--mwnf-travels-label); }
+.mwnf-travels strong { font-size: 12px; color: var(--mwnf-travels-strong); }
 
-/* ── Header and menu ────────────────────────────────────────────────────── */
-.mwnf-travels-header { display: flex; flex-direction: column; padding: 16px 32px 0; }
-.mwnf-travels-header__title { font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif; font-size: 26px; font-weight: bold; color: var(--mwnf-travels-title); text-decoration: none; }
-.mwnf-travels-menu { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; border-bottom: 1px solid var(--mwnf-travels-line); }
-.mwnf-travels-menu__list { display: flex; margin: 0; padding: 0; list-style: none; }
-.mwnf-travels-menu__entry { position: relative; padding: 6px 14px 6px 0; font-weight: bold; text-transform: uppercase; }
-.mwnf-travels-menu__entry > a { text-decoration: none; }
-.mwnf-travels-menu__children { position: absolute; top: 100%; left: 0; z-index: 10; display: none; min-width: 220px; margin: 0; padding: 6px 10px; list-style: none; text-transform: none; font-weight: normal; background-color: var(--mwnf-travels-panel); border: 1px solid var(--mwnf-travels-line); }
+/* ── Header (headerInner) ──────────────────────────────────────────────── */
+.mwnf-travels-header {
+  position: relative;
+  height: 78px;
+  margin: 0;
+  border: 0 solid #910508;
+  border-width: 0 4px;
+  background: var(--mwnf-travels-header) url('../../theme/assets/legacy/inner-bg.jpg') repeat-x left top;
+}
+.mwnf-travels-header__logo {
+  position: absolute;
+  left: 21px;
+  top: 0;
+  width: 139px;
+  height: 78px;
+  padding: 4px 0 0 7px;
+  background: url('../../theme/assets/legacy/logo-bg.jpg') no-repeat;
+}
+.mwnf-travels-header__logo img { display: block; border: 0; }
+.mwnf-travels-header__centre { position: absolute; left: 160px; top: 0; width: 673px; height: 78px; background: url('../../theme/assets/legacy/top-link-bg.jpg') repeat-x; text-align: center; }
+.mwnf-travels-header__title {
+  position: absolute;
+  left: 64px;
+  right: 0;
+  top: 41px;
+  font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+}
+.mwnf-travels .mwnf-travels-header__title { color: var(--mwnf-travels-title); }
+.mwnf-travels-header__side {
+  position: absolute;
+  left: 833px;
+  top: 0;
+  width: 155px;
+  height: 78px;
+  padding: 21px 24px 0 29px;
+  background: url('../../theme/assets/legacy/language-bg.jpg') no-repeat;
+  font-size: 11px;
+}
+.mwnf-travels .mwnf-travels-header__portal { display: block; padding: 0 0 8px; color: var(--mwnf-travels-menu-text); }
+.mwnf-travels .mwnf-travels-header__portal:hover { color: #eaad29; text-decoration: underline; }
+.mwnf-travels-menu__language { width: 95px; height: 21px; border: 1px solid #9d9ea1; background: #fff; font-size: 11px; color: #999; text-align: center; }
+
+/* The top link bar (topLinkBgLeft/Middle/Right) and its drop-down. */
+.mwnf-travels-menu {
+  position: absolute;
+  margin: 0;
+  border: 0;
+  left: 24px;
+  top: 0;
+  width: 649px;
+  height: 18px;
+  padding: 0 21px 0 20px;
+  background:
+    url('../../theme/assets/legacy/top-link-bg-left.jpg') no-repeat left top,
+    url('../../theme/assets/legacy/top-link-bg-right.jpg') no-repeat right top,
+    url('../../theme/assets/legacy/top-link-bg-middle.jpg') repeat-x left top;
+  background-origin: border-box;
+}
+.mwnf-travels-menu__list { display: flex; justify-content: center; margin: 0; padding: 1px 0 0; list-style: none; line-height: 1.7em; }
+.mwnf-travels-menu__entry { position: relative; z-index: 100; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; text-transform: uppercase; }
+.mwnf-travels .mwnf-travels-menu__entry > a { display: block; padding: 0 0.6em; line-height: 17px; font-weight: normal; color: var(--mwnf-travels-title); }
+.mwnf-travels .mwnf-travels-menu__entry > a:hover { color: #fc0; }
+.mwnf-travels-menu__children {
+  position: absolute;
+  top: 17px;
+  left: 1px;
+  display: none;
+  width: 13.1em;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-transform: none;
+  text-align: left;
+  font-size: 11px;
+  line-height: 2.2em;
+}
 .mwnf-travels-menu__entry:hover > .mwnf-travels-menu__children,
 .mwnf-travels-menu__entry:focus-within > .mwnf-travels-menu__children { display: block; }
-.mwnf-travels-menu__children li { padding: 2px 0; }
-.mwnf-travels-menu__language { font-size: 12px; }
+.mwnf-travels .mwnf-travels-menu__children a { display: block; padding: 0 0 0 5px; border: 1px solid #760000; border-top: 0; background: #9a0000; color: var(--mwnf-travels-title); }
+.mwnf-travels .mwnf-travels-menu__children a:hover { background: var(--mwnf-travels-title); color: #420203; }
 
-.mwnf-travels-main { flex: 1; padding: 16px 32px; }
-.mwnf-travels__empty { padding: 40px 0; }
+/* ── The panel (menuSection, mainMenuTop/Middle/BottomBg) ──────────────── */
+.mwnf-travels-frame { padding: 0 20px 12px 17px; background: var(--mwnf-travels-frame); }
+.mwnf-travels-main {
+  width: 959px;
+  min-height: 567px;
+  padding: 0 0 36px;
+  background:
+    url('../../theme/assets/legacy/midtop.jpg') no-repeat left top,
+    url('../../theme/assets/legacy/midbtm.jpg') no-repeat left bottom,
+    url('../../theme/assets/legacy/midbg.jpg') repeat-y left top;
+}
+.mwnf-travels--yellow .mwnf-travels-main {
+  background:
+    url('../../theme/assets/legacy/midtop-yl.jpg') no-repeat left top,
+    url('../../theme/assets/legacy/midbtm-yellow.jpg') no-repeat left bottom,
+    url('../../theme/assets/legacy/midbg-yellow.jpg') repeat-y left top;
+}
+.mwnf-travels-page { display: grid; grid-template-columns: 208px 742px; }
+.mwnf-travels-page__aside { padding: 20px 0 0 10px; }
+.mwnf-travels-page__main { min-width: 0; }
+.mwnf-travels__empty { padding: 40px 18px; }
 
-/* ── The bands over a page ──────────────────────────────────────────────── */
-.mwnf-travels-banner,
-.mwnf-travels-home__banner { margin-bottom: 16px; }
-.mwnf-travels-crumbs { margin-bottom: 10px; }
-.mwnf-travels-crumbs__link { color: var(--mwnf-travels-text); text-decoration: none; }
-.mwnf-travels-crumbs__link:hover { text-decoration: underline; }
-.mwnf-travels-banner__about,
-.mwnf-travels-home__about { margin-top: 10px; }
-.mwnf-travels-banner__about-heading,
-.mwnf-travels-home__about-heading { font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif; font-size: 15px; font-weight: bold; color: var(--mwnf-travels-heading); }
-.mwnf-travels-home__selects { display: flex; gap: 40px; margin-top: 20px; }
-.mwnf-travels-home__select { display: flex; flex-direction: column; gap: 4px; font-weight: bold; }
+/* ── The landing picture (bannerLandingEX) ─────────────────────────────── */
+.mwnf-travels-home {
+  position: relative;
+  height: 521px;
+  background: #930 url('../../theme/assets/legacy/ex-main-bg.jpg') no-repeat;
+  color: #fff;
+}
+.mwnf-travels-home__banner { position: absolute; left: 33px; top: 25px; width: 307px; padding-top: 2px; }
+.mwnf-travels .mwnf-travels-home__heading { color: #fff; }
+.mwnf-travels-home .mwnf-travels-crumbs,
+.mwnf-travels .mwnf-travels-home .mwnf-travels-crumbs__link { color: #fff; }
+.mwnf-travels .mwnf-travels-home .mwnf-travels-crumbs__link:hover { color: #f90; }
+.mwnf-travels-home__about { position: absolute; left: 395px; top: 25px; width: 320px; padding: 10px; }
+.mwnf-travels-home__about { line-height: 18px; }
+.mwnf-travels .mwnf-travels-home__about-heading { padding: 0 0 8px; font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif; font-size: 13px; font-weight: bold; color: #fff; }
+.mwnf-travels-home__selects { position: absolute; left: 45px; top: 335px; display: flex; gap: 20px; }
+.mwnf-travels-home__select { display: flex; flex-direction: column; gap: 10px; font-size: 17px; font-weight: bold; color: #693f00; }
+.mwnf-travels-home__select select { width: 200px; height: 21px; border: 1px solid #9d9ea1; background: #fff; font-size: 11px; font-weight: normal; color: #282828; }
+.mwnf-travels-home__format { position: absolute; left: 500px; top: 320px; display: block; }
 
-.mwnf-travels-detail-band { display: flex; justify-content: space-between; gap: 20px; }
-.mwnf-travels-detail-band__line { padding: 0 0 4px; }
-.mwnf-travels-detail-band__itinerary { font-weight: bold; text-transform: none; color: var(--mwnf-travels-heading); }
-.mwnf-travels-detail-band__book { display: flex; flex-direction: row-reverse; align-items: flex-start; gap: 8px; }
-.mwnf-travels-detail-band__book img { width: 93px; height: auto; border: 0; }
-.mwnf-travels-detail-band__book-label { font-weight: bold; }
+/* ── The banners over a list, a trail and an itinerary ─────────────────── */
+.mwnf-travels-banner { position: relative; display: flex; justify-content: space-between; gap: 20px; padding: 115px 22px 20px 18px; background: url('../../theme/assets/legacy/banner-new-et.jpg') no-repeat left top; }
+.mwnf-travels-banner--theme { min-height: 250px; padding-top: 125px; }
+.mwnf-travels-banner--yellow { background-image: url('../../theme/assets/legacy/iam-banner-Yellow.jpg'); }
+.mwnf-travels-banner__heading-block { flex: 0 1 380px; padding-top: 4px; }
+.mwnf-travels-crumbs { font-size: 11px; color: var(--mwnf-travels-crumbs); }
+.mwnf-travels .mwnf-travels-crumbs__link { color: var(--mwnf-travels-crumbs); }
+.mwnf-travels-banner__about { flex: 0 0 345px; min-height: 124px; margin-top: 4px; padding: 10px; border: 2px solid var(--mwnf-travels-box); color: var(--mwnf-travels-heading); }
+.mwnf-travels-banner__about-heading { padding-bottom: 12px; font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif; font-size: 13px; font-weight: bold; }
+.mwnf-travels-banner--yellow .mwnf-travels-banner__heading,
+.mwnf-travels-banner--yellow .mwnf-travels-crumbs,
+.mwnf-travels .mwnf-travels-banner--yellow .mwnf-travels-crumbs__link { color: #fff; }
+.mwnf-travels-banner--yellow .mwnf-travels-banner__about { flex-basis: 324px; margin-top: -6px; padding: 3px 10px 10px; border-color: #d56b03; background: #f2ac28; color: #322101; }
+.mwnf-travels-banner--yellow .mwnf-travels-banner__about-heading { padding-bottom: 0; line-height: 25px; color: var(--mwnf-travels-visit); }
 
-.mwnf-travels-see-also { margin-top: 12px; }
-.mwnf-travels-see-also__heading { font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif; font-weight: bold; color: var(--mwnf-travels-heading); }
-.mwnf-travels-see-also__tabs { display: flex; flex-wrap: wrap; gap: 4px 16px; padding: 6px 0; border-bottom: 1px solid var(--mwnf-travels-line); }
-.mwnf-travels-see-also__tab a { text-decoration: none; }
-.mwnf-travels-see-also__tab--active a { font-weight: bold; text-decoration: underline; }
+/* ── A list of trails (contentMid01) ───────────────────────────────────── */
+.mwnf-travels-trails__row { display: flex; gap: 10px; margin: 0 18px 0 20px; padding: 10px 5px 30px 0; border-bottom: 1px solid var(--mwnf-travels-rule); }
+.mwnf-travels--yellow .mwnf-travels-trails__row { border-bottom-color: #f7cd7e; }
+.mwnf-travels-trails__cover { flex: 0 0 124px; align-self: flex-start; padding: 10px; border: 2px solid var(--mwnf-travels-box); text-align: center; }
+.mwnf-travels--yellow .mwnf-travels-trails__cover { border-width: 1px; }
+.mwnf-travels-trails__cover img { display: block; width: 93px; height: auto; margin: 0 auto; padding: 3px; background: #c8af79; }
+.mwnf-travels--yellow .mwnf-travels-trails__cover img { background: #fbe6bf; }
+.mwnf-travels-trails__text { font-size: 12px; }
+.mwnf-travels .mwnf-travels-trails__title { padding: 0; font-size: 16px; color: #770306; text-transform: uppercase; }
+.mwnf-travels--yellow .mwnf-travels-trails__text b { color: #322101; }
+.mwnf-travels-trails__visit { padding-top: 3px; font-size: 11px; font-weight: bold; color: var(--mwnf-travels-visit); }
+.mwnf-travels .mwnf-travels-trails__visit a,
+.mwnf-travels .mwnf-travels-trails__visit b { color: var(--mwnf-travels-visit); }
+.mwnf-travels .mwnf-travels-trails__visit a:hover { color: red; }
+.mwnf-travels--yellow .mwnf-travels-trails__visit a:hover { color: #fff; }
 
-/* ── Content ────────────────────────────────────────────────────────────── */
-.mwnf-travels-content { max-width: 707px; }
-.mwnf-travels-content__head { display: flex; justify-content: space-between; align-items: baseline; padding-top: 24px; }
-.mwnf-travels-content__back { text-decoration: none; }
+/* ── A trail's or an itinerary's band (bannerbtm, exDetails) ───────────── */
+.mwnf-travels-detail-band { display: flex; justify-content: space-between; gap: 12px; width: 100%; }
+.mwnf-travels-detail-band__texts { flex: 1 1 520px; min-width: 0; }
+.mwnf-travels-detail-band__lines { margin-top: 13px; }
+.mwnf-travels-detail-band__line { margin: 3px 0; padding: 2px 0 2px 1px; border-bottom: 1px dotted var(--mwnf-travels-dots); font-size: 12px; color: var(--mwnf-travels-heading); }
+.mwnf-travels .mwnf-travels-detail-band__line strong { color: var(--mwnf-travels-heading); }
+.mwnf-travels-detail-band__itinerary { font-weight: bold; color: var(--mwnf-travels-itinerary); }
+.mwnf-travels-detail-band__book {
+  flex: 0 0 189px;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-self: flex-start;
+  height: 156px;
+  margin: -4px -18px 0 0;
+  padding: 5px;
+  border: 2px solid var(--mwnf-travels-box);
+  background: url('../../theme/assets/legacy/des-bg.jpg') no-repeat left top;
+}
+.mwnf-travels-detail-band__book--yellow { border-color: #d56b03; background-color: #f2ac28; background-image: url('../../theme/assets/legacy/des-bg-yl.jpg'); }
+.mwnf-travels-detail-band__book img { display: block; width: 93px; height: auto; padding: 3px; border: 0; background: #c8af79; }
+.mwnf-travels-detail-band__book--yellow img { background: #fbe6bf; }
+.mwnf-travels-detail-band__book-label { width: 70px; font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif; font-size: 13px; font-weight: bold; line-height: 18px; color: var(--mwnf-travels-heading); }
+.mwnf-travels-detail-band__book--yellow .mwnf-travels-detail-band__book-label { font-size: 12px; }
+
+/* See Also, in the left column (seeAlsoCurver): the column's curved end,
+   legacy's heading band and its arrows. */
+.mwnf-travels-page__aside:has(.mwnf-travels-see-also) { padding: 0; background: linear-gradient(var(--mwnf-travels-paper), var(--mwnf-travels-paper)) no-repeat 10px 0 / 198px 100%; }
+.mwnf-travels-see-also { width: 198px; margin: 0 0 0 10px; padding: 1px 0 20px; background: url('../../theme/assets/legacy/linkbottomCurve.jpg') no-repeat left top; }
+.mwnf-travels-see-also__heading {
+  width: 184px;
+  height: 30px;
+  margin: 45px 0 0 10px;
+  padding: 8px 0 0 10px;
+  background: url('../../theme/assets/legacy/seealsoBgNew.jpg') no-repeat;
+  font-family: 'Trebuchet MS', Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  color: #fff;
+}
+.mwnf-travels-see-also--yellow .mwnf-travels-see-also__heading { background-image: url('../../theme/assets/legacy/seealsoBgNew-yellow.jpg'); }
+.mwnf-travels-see-also__tabs { margin: 10px 10px 0; border: 0; padding: 0; }
+.mwnf-travels-see-also__tab { margin: 5px 0 3px; padding: 2px 0 8px 15px; border-bottom: 1px dotted var(--mwnf-travels-dots); background: url('../../theme/assets/legacy/seealsoArrow.gif') no-repeat left top; font-size: 12px; font-weight: bold; }
+.mwnf-travels-see-also--yellow .mwnf-travels-see-also__tab { border-bottom-color: #f9d695; }
+.mwnf-travels .mwnf-travels-see-also__tab a { color: var(--mwnf-travels-link); }
+.mwnf-travels .mwnf-travels-see-also__tab--active a { color: #333; cursor: text; }
+
+/* ── A trail's and an itinerary's content (contentMidFull) ─────────────── */
+.mwnf-travels-content { padding: 0 20px 0 18px; }
+.mwnf-travels-content__head { display: flex; justify-content: space-between; align-items: baseline; padding-top: 40px; }
+.mwnf-travels .mwnf-travels-content__back b { color: var(--mwnf-travels-link); }
 .mwnf-travels-content__neighbours { padding: 24px 0 10px; text-align: right; }
+.mwnf-travels .mwnf-travels-content__neighbours b,
+.mwnf-travels .mwnf-travels-content__neighbours a { color: var(--mwnf-travels-strong); }
+.mwnf-travels-content__prose { line-height: 1.4; }
 .mwnf-travels-content__prose p { padding: 0 0 1em; }
 
-.mwnf-travels-trails__row,
-.mwnf-travels-itinerary-row { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--mwnf-travels-line); }
-.mwnf-travels-trails__cover { flex: 0 0 120px; text-align: center; }
-.mwnf-travels-trails__cover img { width: 93px; height: auto; }
-.mwnf-travels-trails__title { text-transform: uppercase; }
-.mwnf-travels-itinerary-row__picture { flex: 0 0 100px; }
-.mwnf-travels-itinerary-row__picture img { width: 90px; height: auto; }
-.mwnf-travels-itinerary-row__text a { text-decoration: none; }
+.mwnf-travels-itinerary-row { display: flex; gap: 16px; padding: 10px 0 8px 5px; border-bottom: 1px solid var(--mwnf-travels-rule); line-height: 18px; }
+.mwnf-travels-itinerary-row__picture { flex: 0 0 85px; }
+.mwnf-travels-itinerary-row__picture img { display: block; max-width: 85px; max-height: 63px; width: auto; height: auto; padding: 2px; background: #c8af79; }
+.mwnf-travels .mwnf-travels-itinerary-row__text strong,
+.mwnf-travels .mwnf-travels-itinerary-row__text a { color: var(--mwnf-travels-heading); }
 
-.mwnf-travels-gallery { display: flex; gap: 30px; }
+.mwnf-travels-gallery { display: flex; gap: 30px; padding-bottom: 20px; }
 .mwnf-travels-gallery__main { flex: 0 0 300px; }
 .mwnf-travels-gallery__picture { display: block; max-width: 300px; max-height: 240px; border: 0; }
 .mwnf-travels-gallery__caption { margin-top: 5px; }
@@ -101,18 +278,49 @@
    sits outside the 30px picture, as legacy's did. */
 .mwnf-travels-gallery__thumb img { display: block; box-sizing: content-box; width: 30px; height: 30px; max-width: none; border: 1px solid var(--mwnf-travels-thumb-border, #fc6); }
 
-/* ── Footer ─────────────────────────────────────────────────────────────── */
-.mwnf-travels-footer { padding: 10px 32px; font-size: 10px; text-align: center; }
-.mwnf-travels-footer a { color: var(--mwnf-travels-text); text-decoration: none; }
+/* ── Footer: this site's own, under the frame ──────────────────────────── */
+.mwnf-travels-footer { padding: 8px 32px 10px; font-size: 10px; text-align: center; color: var(--mwnf-travels-header); }
+.mwnf-travels .mwnf-travels-footer a { color: var(--mwnf-travels-header); }
 
-@media (max-width: 760px) {
-  .mwnf-travels-header,
+/* ── Narrow screens: one column, the same colours ──────────────────────── */
+@media (max-width: 999px) {
+  .mwnf-travels-header { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; height: auto; padding: 8px 12px; background-image: none; }
+  .mwnf-travels-header__logo,
+  .mwnf-travels-header__centre,
+  .mwnf-travels-header__side,
+  .mwnf-travels-menu,
+  .mwnf-travels-header__title { position: static; }
+  .mwnf-travels-header__logo { width: auto; height: auto; padding: 0; background: none; }
+  .mwnf-travels-header__centre { display: flex; flex-direction: column-reverse; gap: 6px; width: auto; height: auto; flex: 1 1 200px; background: none; text-align: left; }
+  .mwnf-travels-header__side { width: auto; height: auto; padding: 0; background: none; }
+  .mwnf-travels-menu { width: auto; height: auto; padding: 0; background: none; }
+  .mwnf-travels-menu__list { justify-content: flex-start; flex-wrap: wrap; }
+  .mwnf-travels .mwnf-travels-menu__entry > a { padding: 0 1em 0 0; }
+  .mwnf-travels-frame { padding: 0 8px 8px; background: var(--mwnf-travels-frame); }
   .mwnf-travels-main,
-  .mwnf-travels-footer { padding-left: 16px; padding-right: 16px; }
-  .mwnf-travels-menu { flex-direction: column; align-items: flex-start; }
-  .mwnf-travels-menu__list { flex-wrap: wrap; }
-  .mwnf-travels-detail-band,
-  .mwnf-travels-gallery,
-  .mwnf-travels-home__selects { flex-direction: column; }
+  .mwnf-travels--yellow .mwnf-travels-main { width: 100%; min-height: 0; padding: 0; border-radius: 12px; overflow: hidden; background: var(--mwnf-travels-paper); }
+  .mwnf-travels--yellow .mwnf-travels-main { background: #f1ad28; }
+  .mwnf-travels-page { display: flex; flex-direction: column; }
+  .mwnf-travels-banner > *,
+  .mwnf-travels-detail-band > *,
+  .mwnf-travels-gallery > * { flex: none; }
+  .mwnf-travels-page__aside { padding: 0; }
+  .mwnf-travels-page__aside:has(.mwnf-travels-see-also) { background: none; }
+  .mwnf-travels-see-also { width: auto; margin: 16px 16px 0; padding-bottom: 0; background: none; }
+  .mwnf-travels-see-also__heading { margin-top: 0; }
+  .mwnf-travels-home { height: auto; padding: 24px 16px; background-size: cover; background-position: center top; }
+  .mwnf-travels-home__banner,
+  .mwnf-travels-home__about,
+  .mwnf-travels-home__selects,
+  .mwnf-travels-home__format { position: static; width: auto; }
+  .mwnf-travels-home__selects { flex-wrap: wrap; margin: 16px 0; padding: 12px; border-radius: 6px; background: #e8c96a; }
+  .mwnf-travels-home__select select { max-width: 100%; }
+  .mwnf-travels-banner { flex-direction: column; padding: 16px; background-size: 742px auto; background-position: right top; padding-top: 120px; }
+  .mwnf-travels-banner__about,
+  .mwnf-travels-banner--yellow .mwnf-travels-banner__about { flex-basis: auto; margin: 0; }
+  .mwnf-travels-detail-band { flex-direction: column; }
+  .mwnf-travels-detail-band__book { margin: 0; }
+  .mwnf-travels-trails__row { flex-direction: column; margin: 0 16px; }
+  .mwnf-travels-gallery { flex-direction: column; }
   .mwnf-travels-gallery__thumbs { width: 100%; }
 }

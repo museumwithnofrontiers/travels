@@ -1,0 +1,109 @@
+{
+  "about": "The frame this website takes from legacy travels.museumwnf.org (its images/ folder), each file as legacy serves it, byte for byte: the header, the rounded panel, the banners, the Exhibition Trails landing picture, the See Also box and the travel book box, in legacy's default colours and in the yellow of its Islamic Art (IAM) trails. tests/assets.test.js checks every file against its hash.",
+  "files": {
+    "theme/assets/legacy/logo.jpg": {
+      "source": "https://travels.museumwnf.org/images/logo.jpg",
+      "sha256": "b37ba1e05d85f5e928541a2b601a2988529170a7a4ffde047ead0c468ca9b75c"
+    },
+    "theme/assets/legacy/logo-bg.jpg": {
+      "source": "https://travels.museumwnf.org/images/logo-bg.jpg",
+      "sha256": "9fb865e9d07d902f06423067790c65c78c2033722aa038d7d0ede8a6324984c9"
+    },
+    "theme/assets/legacy/inner-bg.jpg": {
+      "source": "https://travels.museumwnf.org/images/inner-bg.jpg",
+      "sha256": "6cd81a97d5b566453c00f430acbc89f06108391a9b88dbc79f0e345bbb47949c"
+    },
+    "theme/assets/legacy/top-link-bg.jpg": {
+      "source": "https://travels.museumwnf.org/images/top-link-bg.jpg",
+      "sha256": "942094365e606fc1ca0c7e0c1cf58ea3ad48444ccdd7dd1bf23e2b97c9257492"
+    },
+    "theme/assets/legacy/top-link-bg-left.jpg": {
+      "source": "https://travels.museumwnf.org/images/top-link-bg-left.jpg",
+      "sha256": "3b0685e1d1e837dc845dd9adbcbc99c51cc19c8c17b19d675c52725cac6d4667"
+    },
+    "theme/assets/legacy/top-link-bg-middle.jpg": {
+      "source": "https://travels.museumwnf.org/images/top-link-bg-middle.jpg",
+      "sha256": "994a1261186b8c3ddef2aec6df57ac98c4da1b929c7b14ac45697633f825510d"
+    },
+    "theme/assets/legacy/top-link-bg-right.jpg": {
+      "source": "https://travels.museumwnf.org/images/top-link-bg-right.jpg",
+      "sha256": "af3c5745a013b0d473c18dcfcdcb9df2a7c38a5bf8a10c6b372e0be122a273f3"
+    },
+    "theme/assets/legacy/language-bg.jpg": {
+      "source": "https://travels.museumwnf.org/images/language-bg.jpg",
+      "sha256": "59ff7935c89748a6f9852d789892ba96e7a936bd51306fc1541d2870b7f05f28"
+    },
+    "theme/assets/legacy/cnbg.jpg": {
+      "source": "https://travels.museumwnf.org/images/cnbg.jpg",
+      "sha256": "390b10bb9261b497c93e8c20437193cfb01b1570fa76f21181ef721ff88e1a2e"
+    },
+    "theme/assets/legacy/midtop.jpg": {
+      "source": "https://travels.museumwnf.org/images/midtop.jpg",
+      "sha256": "07e0856cb639cf71fa5b03a5e116dd91405f7bcccbf25fff87dcf2131e69ffa9"
+    },
+    "theme/assets/legacy/midbg.jpg": {
+      "source": "https://travels.museumwnf.org/images/midbg.jpg",
+      "sha256": "da73ca8ffff35807bddce13e761b5ef87634570d59d18497acb9d32b3970bc00"
+    },
+    "theme/assets/legacy/midbtm.jpg": {
+      "source": "https://travels.museumwnf.org/images/midbtm.jpg",
+      "sha256": "83d15f8a29b1f10b40d57baa0ef986858a10a1d6d95f530b69bb1505b1563b9e"
+    },
+    "theme/assets/legacy/midtop-yl.jpg": {
+      "source": "https://travels.museumwnf.org/images/midtop-yl.jpg",
+      "sha256": "175e5eda13fd2e3582dbf9e4f52e1063dbd7fdb1de0b89ee6ed2c971995ecb19"
+    },
+    "theme/assets/legacy/midbg-yellow.jpg": {
+      "source": "https://travels.museumwnf.org/images/midbg-yellow.jpg",
+      "sha256": "3f3a904bfc2c9e2418c4f4ad54225a69386fdcb1ea66f1b7c96448405dc36361"
+    },
+    "theme/assets/legacy/midbtm-yellow.jpg": {
+      "source": "https://travels.museumwnf.org/images/midbtm-yellow.jpg",
+      "sha256": "f777361548bce8d6434744f868212149541319b01de24ec9f4230e023b194065"
+    },
+    "theme/assets/legacy/ex-main-bg.jpg": {
+      "source": "https://travels.museumwnf.org/images/ex-main-bg.jpg",
+      "sha256": "fed363b97a234df518d1a06710d864e9fd2913f20b98e8610050926121b5285c"
+    },
+    "theme/assets/legacy/exhibition-format-en.jpg": {
+      "source": "https://travels.museumwnf.org/images/exhibition-format-en.jpg",
+      "sha256": "0114cd857a9acc83ce83ae0d1df504402e08068ea17af78d897593ba86556879"
+    },
+    "theme/assets/legacy/banner-new-et.jpg": {
+      "source": "https://travels.museumwnf.org/images/banner-new-et.jpg",
+      "sha256": "838b30f3f92076f21954df6c4ed37dccc93ef7e11ce302c4a560bf543644cea6"
+    },
+    "theme/assets/legacy/iam-banner-Yellow.jpg": {
+      "source": "https://travels.museumwnf.org/images/iam-banner-Yellow.jpg",
+      "sha256": "876ad94485e39c7bc8d0a79f5edb8b2d116c6d04adecc386d6cccd559e3eaa56"
+    },
+    "theme/assets/legacy/des-bg.jpg": {
+      "source": "https://travels.museumwnf.org/images/des-bg.jpg",
+      "sha256": "f469f37c361421e6386295ee5250deaea1e48be063206cc52702a6b89e643c7e"
+    },
+    "theme/assets/legacy/des-bg-yl.jpg": {
+      "source": "https://travels.museumwnf.org/images/des-bg-yl.jpg",
+      "sha256": "03074152d157215bc48996347a6e5222371b17ffc27924d23d3cd90765ccc734"
+    },
+    "theme/assets/legacy/seealsoBgNew.jpg": {
+      "source": "https://travels.museumwnf.org/images/seealsoBgNew.jpg",
+      "sha256": "a3a9ead81348797462295139e582302f42475a4ff67717eb48221f0f980fc9ce"
+    },
+    "theme/assets/legacy/seealsoBgNew-yellow.jpg": {
+      "source": "https://travels.museumwnf.org/images/seealsoBgNew-yellow.jpg",
+      "sha256": "dc6ae8f7a7e927b5aa3ee85346078487f026392934fe09e0da3262378fb164e4"
+    },
+    "theme/assets/legacy/seealsoArrow.gif": {
+      "source": "https://travels.museumwnf.org/images/seealsoArrow.gif",
+      "sha256": "417b934f64b30fd80f40cdaeaf34cdbe5852469ce59eb76a5562af2d96bfc6ff"
+    },
+    "theme/assets/legacy/linkbottomCurve.jpg": {
+      "source": "https://travels.museumwnf.org/images/linkbottomCurve.jpg",
+      "sha256": "7942e5f60ce7a3f88dc69b010becec8670da294861a72a89ab37163082dc118a"
+    },
+    "theme/assets/legacy/dotted-line.gif": {
+      "source": "https://travels.museumwnf.org/images/dotted-line.gif",
+      "sha256": "7af42b65228b3684a9b46b7b4f91d9e77d9daddce2807f492235ec52dee7ed64"
+    }
+  }
+}
