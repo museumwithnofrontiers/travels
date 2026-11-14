@@ -1,9 +1,9 @@
-import { travelsConfig } from '@museumwnf/viewer-layout/travels'
+import { travelsConfig } from './routes.js'
 
 // The whole declaration of this website: the Exhibition Trails of legacy
-// travels.museumwnf.org, whose pages, shell, menu and footer are
-// viewer-layout's (`travelsConfig`, @museumwnf/viewer-layout/travels). What
-// is this website's own is below: its data package and its address.
+// travels.museumwnf.org. Its pages, shell, menu and footer are this
+// repository's own (src/routes.js, src/SiteShell.vue, src/views/). Below:
+// its data package and its address.
 
 export default travelsConfig({
   // The dataset package this website renders. Must match the alias in

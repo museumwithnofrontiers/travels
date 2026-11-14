@@ -1,6 +1,7 @@
 import { createStandardViewer, textsByLanguage } from '@museumwnf/viewer-core'
 import { catalogues as sharedTexts } from '@museumwnf/viewer-i18n/travels'
 import '@museumwnf/viewer-layout/style.css'
+import './styles/travels.css'
 import '../theme/tokens.css'
 import '../theme/overrides.css'
 import './styles/site.css'

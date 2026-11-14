@@ -4,7 +4,7 @@ import {
   checkOfferedLanguages, checkRoutes, checkSectionMeta, checkTextsRendered, mountSite,
 } from '@museumwnf/viewer-core/testing'
 import { catalogues as sharedTexts } from '@museumwnf/viewer-i18n/travels'
-import { ITINERARY_TYPE, isListed, projectCode, trailsOf } from '@museumwnf/viewer-layout/travels'
+import { ITINERARY_TYPE, isListed, projectCode, trailsOf } from '../src/index.js'
 import ownTexts from '../locales/en.json'
 import config from '../src/dataset.config.js'
 
@@ -21,7 +21,7 @@ async function aTrail() {
   return { trail, itinerary }
 }
 
-// The pages are viewer-layout's (`travelsConfig`), tested there against its
+// The pages are this repository's (src/), tested in tests/pages/ against a
 // fixture package; this test proves they render against this website's own
 // package, each on an application mounted on that page's address — as a
 // visitor arrives from a link.
